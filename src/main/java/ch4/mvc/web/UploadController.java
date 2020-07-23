@@ -14,11 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class UploadController {
 
-	@RequestMapping(value = "/upload")
+	@RequestMapping(value = "/upload",method = RequestMethod.POST)
 	public @ResponseBody String upload(MultipartFile file) {
-		System.out.println(file.getOriginalFilename());
 		try {
-			FileUtils.writeByteArrayToFile(new File("d:/upload/"+file.getOriginalFilename()), file.getBytes());
+			FileUtils.writeByteArrayToFile(new File("D:/upload/"+file.getOriginalFilename()), file.getBytes());
 			return "ok";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

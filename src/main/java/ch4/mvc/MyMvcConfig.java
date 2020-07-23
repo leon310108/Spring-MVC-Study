@@ -1,8 +1,11 @@
 package ch4.mvc;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -13,15 +16,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import ch4.mvc.messageconverter.MyMessageConverter;
+
 @Configuration
 @EnableWebMvc
-@ComponentScan({"ch4.mvc","ch4.mvc.json","ch4.mvc.json.domain","ch4.mvc.web"})
+@ComponentScan({"ch4.mvc","ch4.mvc.json","ch4.mvc.json.domain","ch4.mvc.web","ch4.mvc.messageconverter"})
 public class MyMvcConfig extends WebMvcConfigurerAdapter{
 
 	@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver=new InternalResourceViewResolver();
-		viewResolver.setPrefix("/WEB-INF/classes/views/");
+		viewResolver.setPrefix("/WEB-INF/classes/views");
 		viewResolver.setSuffix(".jsp");
 		viewResolver.setViewClass(JstlView.class);
 		return viewResolver;
@@ -30,7 +35,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		registry.addResourceHandler("/assets/d/**").addResourceLocations("file:d:/");
+		registry.addResourceHandler("/assets/**").addResourceLocations("file:d:/");
 	}
 	
 	@Bean
@@ -49,7 +54,8 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter{
 		// TODO Auto-generated method stub
 		//login为网页访问名，index为jsp文件名
 		registry.addViewController("/login").setViewName("/index");
-		registry.addViewController("/upload").setViewName("/upload");
+		registry.addViewController("/toUpload").setViewName("/upload");
+		registry.addViewController("/converter").setViewName("/converter");
 	}
 	
 	@Bean
@@ -58,5 +64,15 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter{
 		multipartResolver.setMaxUploadSize(1000000);
 		return multipartResolver;
 	}
+
+	@Override
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+		// TODO Auto-generated method stub
+		converters.add(converter());
+	}
 	
+	@Bean
+	public MyMessageConverter converter() {
+		return new  MyMessageConverter();
+	}
 }
