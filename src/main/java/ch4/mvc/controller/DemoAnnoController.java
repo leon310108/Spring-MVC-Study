@@ -1,4 +1,4 @@
-package ch4.mvc.json;
+package ch4.mvc.controller;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,4 +1,4 @@
-package ch4.mvc.json;
+package ch4.mvc.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

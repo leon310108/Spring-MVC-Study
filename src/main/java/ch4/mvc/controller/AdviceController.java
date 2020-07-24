@@ -1,8 +1,10 @@
-package ch4.mvc.json.domain;
+package ch4.mvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ch4.mvc.json.domain.DemoObj;
 
 @Controller
 public class AdviceController {

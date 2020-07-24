@@ -1,4 +1,4 @@
-package ch4.mvc.web;
+package ch4.mvc.controller;
 
 import java.io.File;
 import java.io.IOException;

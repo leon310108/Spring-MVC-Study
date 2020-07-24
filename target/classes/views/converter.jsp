@@ -9,7 +9,8 @@
 <body>
 	<div id="resp"></div>
 	<input type="button" onclick="req();" value="请求" />
-	<script type="image/jpg" src="file:d:/h002.jpg"></script>
+	<!-- 获取jquery脚本 -->
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
 	<script>
 		function req() {
 			$.ajax({

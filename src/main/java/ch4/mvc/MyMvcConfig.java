@@ -20,7 +20,7 @@ import ch4.mvc.messageconverter.MyMessageConverter;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"ch4.mvc","ch4.mvc.json","ch4.mvc.json.domain","ch4.mvc.web","ch4.mvc.messageconverter"})
+@ComponentScan({"ch4.mvc.controller"})
 public class MyMvcConfig extends WebMvcConfigurerAdapter{
 
 	@Bean
@@ -35,7 +35,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		registry.addResourceHandler("/assets/**").addResourceLocations("file:d:/");
+		registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
 	}
 	
 	@Bean
@@ -56,6 +56,7 @@ public class MyMvcConfig extends WebMvcConfigurerAdapter{
 		registry.addViewController("/login").setViewName("/index");
 		registry.addViewController("/toUpload").setViewName("/upload");
 		registry.addViewController("/converter").setViewName("/converter");
+		registry.addViewController("/sse").setViewName("/sse");
 	}
 	
 	@Bean
